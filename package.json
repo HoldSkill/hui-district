@@ -1,7 +1,7 @@
 {
   "name": "hui-district",
   "version": "1.0.0",
-  "description": "Data of provinces, cities and counties in china. ",
+  "description": "The data of provinces, cities and counties in china. ",
   "files": [
     "dist"
   ],
