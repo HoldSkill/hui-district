@@ -11,7 +11,7 @@ var pkg = require('../package.json');
 
 var link = 'http://www.stats.gov.cn/tjsj/tjbz/xzqhdm/201703/t20170310_1471429.html';
 
-var describe = '/* ' + pkg.name + ' v' + pkg.version + ' by YDCSS (c) ' + new Date().getFullYear() + ' Licensed ' + pkg.license + ' */\n';
+var describe = '/* ' + pkg.name + ' v' + pkg.version + ' by HoldSkill (c) ' + new Date().getFullYear() + ' Licensed ' + pkg.license + ' */\n';
 
 var missingData = require('./missing.json');
 
