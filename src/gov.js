@@ -1,3 +1,4 @@
+
 /**
  *  数据来源于【国家统计局】
  *  http://www.stats.gov.cn/tjsj/tjbz/xzqhdm
@@ -11,6 +12,8 @@ var pkg = require('../package.json');
 var link = 'http://www.stats.gov.cn/tjsj/tjbz/xzqhdm/201703/t20170310_1471429.html';
 
 var describe = '/* ' + pkg.name + ' v' + pkg.version + ' by YDCSS (c) ' + new Date().getFullYear() + ' Licensed ' + pkg.license + ' */\n';
+
+var missingData = require('./missing.json');
 
 var fetchItems = function (callback) {
 
@@ -62,6 +65,12 @@ var pickItems = function (items, withID, withArea) {
         } else if (/(&nbsp;){6}/g.test(item)) {
             result[provinceIndex - 1].c.push(obj);
             ++areaIndex;
+            if(withArea) {
+                // 中山市、东莞市、三沙市、儋州市，在国家统计局表里没有下级数据，手动添加
+                if (obj.n === '中山市' || obj.n === '东莞市' || obj.n === '三沙市' || obj.n === '儋州市') {
+                    obj.c = missingData[obj.n].c;
+                }
+            }
         } else {
             if (withArea) {
                 var j = {};
@@ -72,7 +81,7 @@ var pickItems = function (items, withID, withArea) {
         }
     });
 
-    return describe + '!function(){var district=' + JSON.stringify(result) + ';if(typeof define==="function"){define(district)}else{window.YDUI_DISTRICT=district}}();';
+    return describe + '!function(){var district=' + JSON.stringify(result) + ';if(typeof define==="function"){define(district)}else{window.HUI_DISTRICT=district}}();';
 };
 
 fetchItems(function (error, ret) {
